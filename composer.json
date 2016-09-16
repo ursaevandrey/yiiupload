@@ -1,0 +1,41 @@
+{
+  "name": "YiiUpload",
+  "type": "project",
+  "author": "Ursaev Andrey",
+  "require": {
+    "php": ">=5.5.0",
+    "yiisoft/yii2": ">=2.0.5",
+    "yiisoft/yii2-bootstrap": "*"
+  },
+  "require-dev": {
+    "yiisoft/yii2-debug": "*",
+    "yiisoft/yii2-gii": "*"
+  },
+  "config": {
+    "process-timeout": 1800
+  },
+  "scripts": {
+    "post-create-project-cmd": [
+      "php -r \"copy('applications/web/config/main.php.sample', 'applications/web/config/main.php');\"",
+      "php -r \"copy('applications/web/www/.htaccess.sample', 'applications/web/www/.htaccess');\"",
+      "yii\\composer\\Installer::postCreateProject"
+    ]
+  },
+  "extra": {
+    "yii\\composer\\Installer::postCreateProject": {
+      "setPermission": [
+        {
+          "applications/web/runtime": "0777",
+          "applications/web/www": "0777"
+        }
+      ],
+      "generateCookieValidationKey": [
+        "applications/web/config/main.php"
+      ]
+    },
+    "asset-installer-paths": {
+      "npm-asset-library": "vendor/npm",
+      "bower-asset-library": "vendor/bower"
+    }
+  }
+}
